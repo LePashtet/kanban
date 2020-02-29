@@ -6,7 +6,14 @@ const http = axios.create({
     headers: {'Content-Type': 'application/json'}
 });
 http.interceptors.request.use(tokenProvider({
-    getToken: () => localStorage.getItem('access_token'),
+    getToken: () => {
+        if ( localStorage.getItem('access_token'))  return localStorage.getItem('access_token');
+        else {
+            localStorage.removeItem('access_token');
+            return 'none'
+        }
+
+    },
     headerFormatter: (getToken) => 'JWT ' + getToken,
 }));
 

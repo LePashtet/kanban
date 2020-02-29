@@ -10,9 +10,11 @@ const routes = [
     path: "/",
     component: () =>
         import(/* webpackChunkName: "table"*/ "../views/Table.vue"),
-    // beforeEnter: () => {
-    //   console.log(store.dispatch('getCards'))
-    // }
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem('access_token')) {
+        next({path:'/auth'})
+      } else next();
+    }
 
   },
   {
@@ -22,7 +24,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Auth.vue")
+      import(/* webpackChunkName: "about" */ "../views/Auth.vue"),
   }
 ];
 

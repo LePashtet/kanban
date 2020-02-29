@@ -27,7 +27,7 @@ export default new Vuex.Store({
           state.progress.push(payload);
       },
       SET_REVIEW(state, payload){
-      state.review.push(payload);
+        state.review.push(payload);
       },
       SET_APPROVED(state, payload){
           state.approved.push(payload);
@@ -53,6 +53,13 @@ export default new Vuex.Store({
               localStorage.setItem('access_token', `${ resp.data.token }`)
           })
     },
+      // eslint-disable-next-line no-unused-vars
+    signUp({ commit }, payload) {
+          http.post('/users/create/', payload)
+              .then(resp => {
+                  localStorage.setItem('access_token', `${ resp.data.token }`)
+              })
+      },
     getCards({ dispatch }){
         http.get('/cards/')
             .then(res =>  dispatch('sortCards',res.data))
@@ -92,6 +99,18 @@ export default new Vuex.Store({
                     break;
             }
         })
+    },
+      // eslint-disable-next-line no-unused-vars
+    updateCards({ dispatch }, cards){
+        cards.val.forEach(i=>{
+             http.patch(`/cards/${ i.id }/`, {row:cards.id,seq_num:i.seq_num,text:i.text})
+                 .then(()=>{
+                    dispatch('getCards')
+                 })
+                .catch(() => {return 'err'})
+
+        })
+
     }
   },
   modules: {}

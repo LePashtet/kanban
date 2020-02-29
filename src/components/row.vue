@@ -5,8 +5,8 @@
             span ({{value.length}})
         .row__body
             .row__body__cards
-                draggable(@change="change" v-model="value" group="people" @start="drag=true" @end="drag=false")
-                    card( @del="deletee" v-for="card in value" :id="card.id" :val="card.text").row__body__cards__card
+                draggable( v-model="val" group="people" @start="drag=true" @end="drag=false")
+                    card( @del="deletee" v-for="card in val" :key="card.id" :id="card.id" :val="card.text").row__body__cards__card
             .row__body__add(v-if="!add" @click="add = true")
                 img(src="@/assets/add.png")
                 span Добавить карточку
@@ -35,6 +35,16 @@
 
             }
         },
+        computed: {
+          val:{
+              get(){
+                  return this.value
+              },
+              set(value){
+                  this.$store.dispatch('updateCards', {val:value,id:this.id})
+              }
+          }
+        },
         methods:{
             deletee(id){
                 this.$store.dispatch('deleteCard', id)
@@ -47,9 +57,6 @@
                 this.add = false;
                 this.text = '';
             },
-            change(){
-                this.$emit('input', this.value)
-            }
         }
 
     }
