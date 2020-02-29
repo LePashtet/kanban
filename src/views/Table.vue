@@ -1,10 +1,10 @@
 <template lang="pug">
     .table
         .table__body
-            row(color="#FB7E46"  title="on-hold" v-model="hold").table__body__row.first
-            row(color="#2C93C0"  title="in-progress" v-model="progress").table__body__row
-            row(color="#F4CE46"  title="needs-review" v-model="review").table__body__row
-            row(color="#00B961"  title="approved" v-model="approved").table__body__row.last
+            row(color="#FB7E46"  title="on-hold" :id="0" v-model="hold").table__body__row.first
+            row(color="#2C93C0"  title="in-progress" :id="1" v-model="progress").table__body__row
+            row(color="#F4CE46"  title="needs-review" :id="2" v-model="review").table__body__row
+            row(color="#00B961"  title="approved" :id="3" v-model="approved").table__body__row.last
 </template>
 
 <script>
@@ -26,7 +26,7 @@
                     return this.$store.state.hold
                 },
                 set (value) {
-                    this.$store.commit('updateHold', value)
+                    this.$store.commit('UPDATE_HOLD', value)
                 }
             },
             progress: {
@@ -34,7 +34,7 @@
                     return this.$store.state.progress
                 },
                 set (value) {
-                    this.$store.commit('updateProgress', value)
+                    this.$store.commit('UPDATE_PROGRESS', value)
                 }
             },
             review: {
@@ -42,7 +42,7 @@
                     return this.$store.state.review
                 },
                 set (value) {
-                    this.$store.commit('updateReview', value)
+                    this.$store.commit('UPDATE_REVIEW', value)
                 }
             },
             approved: {
@@ -50,9 +50,13 @@
                     return this.$store.state.approved
                 },
                 set (value) {
-                    this.$store.commit('updateApproved', value)
+                    this.$store.commit('UPDATE_APPROVED', value)
                 }
             }
+        },
+        created() {
+            this.$store.dispatch('getCards');
+
         }
 
     }

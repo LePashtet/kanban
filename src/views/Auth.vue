@@ -18,6 +18,9 @@
         methods:{
             signIn(){
                 this.$store.dispatch('signIn', {username: this.name, password: this.password})
+                    .then(()=>{
+                        this.$router.push({path:'/'})
+                    })
             }
         }
     }

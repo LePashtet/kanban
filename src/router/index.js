@@ -1,14 +1,18 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+// import store from '../store';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     name: "Table",
-    path: "/table",
+    path: "/",
     component: () =>
-        import(/* webpackChunkName: "table"*/ "../views/Table.vue")
+        import(/* webpackChunkName: "table"*/ "../views/Table.vue"),
+    // beforeEnter: () => {
+    //   console.log(store.dispatch('getCards'))
+    // }
 
   },
   {
