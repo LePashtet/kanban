@@ -13,39 +13,46 @@
 </template>
 
 <script>
-    export default {
-        name: "Auth",
-        data(){
-            return{
-                name: '',
-                email: '',
-                password: '',
-                login: false
-            }
-        },
-        methods:{
-            signIn(){
-                this.$store.dispatch('signIn', {username: this.name, password: this.password});
-                   setTimeout(()=>{
-                       this.$router.push({path:'/'})
-                   },1000)
-            },
-            signUp(){
-                this.$store.dispatch('signUp', {username: this.name, password: this.password, email: this.email});
-                setTimeout(()=>{
-                    this.$router.push({path:'/'})
-                },1000)
-            }
-        }
+export default {
+  name: "Auth",
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+      login: false
+    };
+  },
+  methods: {
+    signIn() {
+      this.$store.dispatch("signIn", {
+        username: this.name,
+        password: this.password
+      });
+      setTimeout(() => {
+        this.$router.push({ path: "/" });
+      }, 1000);
+    },
+    signUp() {
+      this.$store.dispatch("signUp", {
+        username: this.name,
+        password: this.password,
+        email: this.email
+      });
+      setTimeout(() => {
+        this.$router.push({ path: "/" });
+      }, 1000);
     }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-.auth{
-    padding-top:30vh ;
-    width: max-content;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
+.auth {
+  padding-top: 30vh;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 }
 </style>

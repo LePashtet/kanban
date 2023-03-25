@@ -8,75 +8,68 @@
 </template>
 
 <script>
-
-    import row from "../components/row";
-    export default {
-        name: "Table",
-        components:{
-            row,
-        },
-        data(){
-            return{
-
-            }
-        },
-        computed: {
-            hold: {
-                get () {
-                    return this.$store.state.hold
-                },
-                set (value) {
-                    this.$store.commit('UPDATE_HOLD', value)
-                }
-            },
-            progress: {
-                get () {
-                    return this.$store.state.progress
-                },
-                set (value) {
-                    this.$store.commit('UPDATE_PROGRESS', value)
-                }
-            },
-            review: {
-                get () {
-                    return this.$store.state.review
-                },
-                set (value) {
-                    this.$store.commit('UPDATE_REVIEW', value)
-                }
-            },
-            approved: {
-                get () {
-                    return this.$store.state.approved
-                },
-                set (value) {
-                    this.$store.commit('UPDATE_APPROVED', value)
-                }
-            }
-        },
-        created() {
-            this.$store.dispatch('getCards');
-
-        }
-
+import row from "../components/row";
+export default {
+  name: "Table",
+  components: {
+    row
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    hold: {
+      get() {
+        return this.$store.state.hold;
+      },
+      set(value) {
+        this.$store.commit("UPDATE_HOLD", value);
+      }
+    },
+    progress: {
+      get() {
+        return this.$store.state.progress;
+      },
+      set(value) {
+        this.$store.commit("UPDATE_PROGRESS", value);
+      }
+    },
+    review: {
+      get() {
+        return this.$store.state.review;
+      },
+      set(value) {
+        this.$store.commit("UPDATE_REVIEW", value);
+      }
+    },
+    approved: {
+      get() {
+        return this.$store.state.approved;
+      },
+      set(value) {
+        this.$store.commit("UPDATE_APPROVED", value);
+      }
     }
+  },
+  created() {
+    this.$store.dispatch("getCards");
+  }
+};
 </script>
 
 <style scoped lang="scss">
-.table{
-    height: 100%;
-    overflow-x: auto;
+.table {
+  height: 100%;
+  overflow-x: auto;
 
+  &__body {
+    margin: 0 auto;
+    width: max-content;
+    display: flex;
 
-    &__body{
-        margin: 0 auto;
-        width: max-content;
-        display: flex;
-
-        &__row{
-            padding: 60px 20px 0 20px;
-        }
+    &__row {
+      padding: 60px 20px 0 20px;
     }
-
+  }
 }
 </style>
